@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package com.lichunorz.grpc;
+
+option java_package = "com.lichunorz.grpc.gen";
+option java_outer_classname = "StudentProto";
+option java_multiple_files = true;
+
+service StudentService {
+    rpc getRealNameByUsername (MyRequest) returns (MyResponse) {
+    }
+
+    rpc getStudentsByAge (Age) returns (stream Student) {
+    }
+
+    rpc getStudentListByAges (stream Ages) returns (StudentList) {
+    }
+
+    rpc talk (stream MyRequest) returns (stream MyResponse);
+}
+
+message MyRequest {
+    string username = 1;
+}
+
+message MyResponse {
+    string realname = 2;
+}
+
+message Age {
+    int32 age = 1;
+}
+
+message Ages {
+    repeated Age age = 1;
+}
+
+message Student {
+    int32 age = 1;
+    string name = 2;
+    string city = 3;
+}
+
+message StudentList {
+    repeated Student studentList = 1;
+}
